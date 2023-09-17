@@ -4,7 +4,15 @@ import { Doughnut } from "react-chartjs-2";
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const data = {
-	labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+	labels: [
+		"Autor",
+		"Título",
+		"Fecha",
+		"Editorial",
+		"Materia",
+		"Organización",
+		"Lugar de Organización",
+	],
 	datasets: [
 		{
 			label: "# of Votes",

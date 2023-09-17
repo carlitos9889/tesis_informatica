@@ -12,7 +12,6 @@ function App() {
 
 	return (
 		<>
-			{/* TODO: AppBar */}
 			<CustomAppBar onTap={setshowGrafica}>
 				{showGrafica == GRAFICOS.TABLE && (
 					<Container>
@@ -30,37 +29,6 @@ function App() {
 					</Container>
 				)}
 			</CustomAppBar>
-			{/* TODO: CONTENT */}
-			{/* <Container style={{ justifyContent: "center" }}>
-				<CustomTable />
-			</Container> */}
-			{/* <Stack
-				spacing={2}
-				direction="row"
-				justifyContent={"start"}
-				marginTop={3}
-			>
-				<Box flex={2}>
-					<CustomCard>
-						<CustomLinearChart />
-					</CustomCard>
-				</Box>
-				<Box flex={2}>
-					<CustomCard>
-						<CustomVerticalChart />
-					</CustomCard>
-				</Box>
-				<Box flex={1}>
-					<CustomCard>
-						<CustomPie />
-					</CustomCard>
-				</Box>
-			</Stack>
-			<Box marginLeft={5} width={"73%"}>
-				<CustomCard>
-					<CustomTable />
-				</CustomCard>
-			</Box> */}
 		</>
 	);
 }
