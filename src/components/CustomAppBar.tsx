@@ -19,7 +19,10 @@ import ListItemText from "@mui/material/ListItemText";
 import LineAxisSharpIcon from "@mui/icons-material/LineAxisSharp";
 import BackupTableSharpIcon from "@mui/icons-material/BackupTableSharp";
 import DonutSmallSharpIcon from "@mui/icons-material/DonutSmallSharp";
+import { Options } from "react-to-pdf";
+
 import { GRAFICOS } from "../enums/GRAFICOS";
+import Button from "@mui/material/Button";
 
 const drawerWidth = 240;
 
@@ -95,6 +98,8 @@ const Drawer = styled(MuiDrawer, {
 interface Props {
 	children: React.ReactNode;
 	onTap: React.Dispatch<React.SetStateAction<GRAFICOS>>;
+	tipoGrafica?: GRAFICOS;
+	toPDF: (options?: Options | undefined) => void;
 }
 
 const GRAFICOS_LAYOUTS = [
@@ -115,7 +120,12 @@ const GRAFICOS_LAYOUTS = [
 	},
 ];
 
-export default function CustomAppBar({ children, onTap }: Props) {
+export default function CustomAppBar({
+	children,
+	onTap,
+	tipoGrafica = GRAFICOS.TABLE,
+	toPDF,
+}: Props) {
 	const theme = useTheme();
 	const [open, setOpen] = React.useState(false);
 
@@ -144,9 +154,18 @@ export default function CustomAppBar({ children, onTap }: Props) {
 					>
 						<MenuIcon />
 					</IconButton>
-					<Typography variant="h6" noWrap component="div">
-						Mini variant drawer
+					<Typography
+						variant="h6"
+						component="div"
+						sx={{ flexGrow: 1 }}
+					>
+						Nombre de la empresa
 					</Typography>
+					{tipoGrafica != GRAFICOS.TABLE && (
+						<Button color="inherit" onClick={() => toPDF()}>
+							Exportar Gráfica
+						</Button>
+					)}
 				</Toolbar>
 			</AppBar>
 			<Drawer variant="permanent" open={open}>
