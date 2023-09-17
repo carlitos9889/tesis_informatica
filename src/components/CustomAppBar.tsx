@@ -159,7 +159,7 @@ export default function CustomAppBar({
 						component="div"
 						sx={{ flexGrow: 1 }}
 					>
-						Nombre de la empresa
+						Nombre de la empresa aun desconocido
 					</Typography>
 					{tipoGrafica != GRAFICOS.TABLE && (
 						<Button color="inherit" onClick={() => toPDF()}>
