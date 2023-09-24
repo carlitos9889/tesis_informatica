@@ -2,7 +2,7 @@ import "./App.css";
 import CustomAppBar from "./components/CustomAppBar";
 import Container from "@mui/material/Container";
 import { usePDF } from "react-to-pdf";
-import CustomTable from "./components/CustomTable";
+import FullFeaturedCrudGrid from "./components/CustomTable";
 import { useState } from "react";
 import { CustomLinearChart } from "./components/charts/CustomLineChart";
 import { CustomPie } from "./components/charts/CustomPie";
@@ -22,7 +22,7 @@ function App() {
 			>
 				{showGrafica == GRAFICOS.TABLE && (
 					<Container>
-						<CustomTable />
+						<FullFeaturedCrudGrid />
 					</Container>
 				)}
 				{showGrafica == GRAFICOS.LINEAL && (
