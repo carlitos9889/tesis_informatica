@@ -19,6 +19,13 @@ import ListItemText from "@mui/material/ListItemText";
 import LineAxisSharpIcon from "@mui/icons-material/LineAxisSharp";
 import BackupTableSharpIcon from "@mui/icons-material/BackupTableSharp";
 import DonutSmallSharpIcon from "@mui/icons-material/DonutSmallSharp";
+import PersonPinOutlinedIcon from "@mui/icons-material/PersonPinOutlined";
+import TodayOutlinedIcon from "@mui/icons-material/TodayOutlined";
+import TitleOutlinedIcon from "@mui/icons-material/TitleOutlined";
+import FormatColorFillOutlinedIcon from "@mui/icons-material/FormatColorFillOutlined";
+import TopicOutlinedIcon from "@mui/icons-material/TopicOutlined";
+import InventoryOutlinedIcon from "@mui/icons-material/InventoryOutlined";
+import PlaceOutlinedIcon from "@mui/icons-material/PlaceOutlined";
 import { Options } from "react-to-pdf";
 
 import { GRAFICOS } from "../enums/GRAFICOS";
@@ -117,6 +124,41 @@ const GRAFICOS_LAYOUTS = [
 		layoutName: "Pie",
 		grafica: GRAFICOS.PIE,
 		icono: <DonutSmallSharpIcon />,
+	},
+	{
+		layoutName: "AUTOR",
+		grafica: GRAFICOS.LINEAL_AUTHOR,
+		icono: <PersonPinOutlinedIcon />,
+	},
+	{
+		layoutName: "TITULO",
+		grafica: GRAFICOS.LINEAL_TITTLE,
+		icono: <TitleOutlinedIcon />,
+	},
+	{
+		layoutName: "FECHA",
+		grafica: GRAFICOS.LINEAL_DATE,
+		icono: <TodayOutlinedIcon />,
+	},
+	{
+		layoutName: "EDITORIAL",
+		grafica: GRAFICOS.LINEAL_EDITORIAL,
+		icono: <FormatColorFillOutlinedIcon />,
+	},
+	{
+		layoutName: "MATERIA",
+		grafica: GRAFICOS.LINEAL_MATERIA,
+		icono: <TopicOutlinedIcon />,
+	},
+	{
+		layoutName: "ORGANIZACION",
+		grafica: GRAFICOS.LINEAL_ORGANIZATION,
+		icono: <InventoryOutlinedIcon />,
+	},
+	{
+		layoutName: "LUGAR ORGANIZACION",
+		grafica: GRAFICOS.LINEAL_PLACE_ORGANIZATION,
+		icono: <PlaceOutlinedIcon />,
 	},
 ];
 

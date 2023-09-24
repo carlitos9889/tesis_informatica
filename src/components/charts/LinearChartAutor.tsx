@@ -7,8 +7,6 @@ import {
 	Title,
 	Tooltip,
 	Legend,
-	ChartData,
-	Point,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 
@@ -52,10 +50,21 @@ const options = {
 	},
 };
 
-interface Props {
-	data: ChartData<"line", (number | Point | null)[], unknown>;
-}
+const labels = ["January", "February", "March", "April", "May", "June", "July"];
 
-export function CustomLinearChart({ data }: Props) {
+const data = {
+	labels,
+	datasets: [
+		{
+			label: "Autor",
+			data: labels.map(() => Math.random() * 1000),
+			borderColor: "rgb(9, 122, 118)",
+			backgroundColor: "rgba(9, 122, 118, 0.5)",
+			yAxisID: "y",
+		},
+	],
+};
+
+export function LinearChartAutor() {
 	return <Line options={options} data={data} />;
 }
