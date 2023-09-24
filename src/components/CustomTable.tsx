@@ -10,7 +10,6 @@ import {
 	GridRowModes,
 	DataGrid,
 	GridColDef,
-	GridToolbarContainer,
 	GridActionsCellItem,
 	GridEventListener,
 	GridRowId,
@@ -33,10 +32,6 @@ const ROWS: GridRowsProp = Array.from({ length: 100 }, () => {
 		lugardeOrganizacion: "LugarOrganizacion" + "-" + id,
 	};
 });
-
-function EditToolbar() {
-	return <GridToolbarContainer></GridToolbarContainer>;
-}
 
 export default function FullFeaturedCrudGrid() {
 	const [rows, setRows] = React.useState(ROWS);
