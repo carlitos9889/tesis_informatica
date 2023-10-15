@@ -2,8 +2,6 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/DeleteOutlined";
-import SaveIcon from "@mui/icons-material/Save";
-import CancelIcon from "@mui/icons-material/Close";
 import {
 	GridRowsProp,
 	GridRowModesModel,
@@ -18,6 +16,8 @@ import {
 	GridToolbar,
 } from "@mui/x-data-grid";
 import { randomId, useDemoData } from "@mui/x-data-grid-generator";
+import { AlertDialogSlideMap } from "./DialogMap";
+import { AlertDialogSlide } from "./CustomDialog";
 
 const ROWS: GridRowsProp = Array.from({ length: 100 }, () => {
 	const id = randomId();
@@ -39,6 +39,14 @@ export default function FullFeaturedCrudGrid() {
 		{}
 	);
 
+	const [open, setopen] = React.useState(false);
+	const [openEdit, setOpenEdit] = React.useState(false);
+	const idSelected = React.useRef<GridRowId>();
+	const idSelecteMap = React.useRef<GridRowId>();
+	const handleClose = () => {
+		setopen(false);
+	};
+
 	const handleRowEditStop: GridEventListener<"rowEditStop"> = (
 		params,
 		event
@@ -48,34 +56,31 @@ export default function FullFeaturedCrudGrid() {
 		}
 	};
 
-	const handleEditClick = (id: GridRowId) => () => {
-		setRowModesModel({
-			...rowModesModel,
-			[id]: { mode: GridRowModes.Edit },
-		});
+	// const handleEditClick = (id: GridRowId) => () => {
+	// 	idSelected.current = id;
+	// 	setRowModesModel({
+	// 		...rowModesModel,
+	// 		[id]: { mode: GridRowModes.Edit },
+	// 	});
+	// };
+
+	const handleOpenDialog = (id: GridRowId) => () => {
+		idSelected.current = id;
+		setopen(true);
 	};
 
-	const handleSaveClick = (id: GridRowId) => () => {
-		setRowModesModel({
-			...rowModesModel,
-			[id]: { mode: GridRowModes.View },
-		});
+	const handleOpenMap = (id: GridRowId) => {
+		idSelecteMap.current = id;
+		setOpenEdit(true);
 	};
 
-	const handleDeleteClick = (id: GridRowId) => () => {
-		setRows(rows.filter((row) => row.id !== id));
+	const handleDelete = () => {
+		setRows(rows.filter((row) => row.id !== idSelected.current));
 	};
 
-	const handleCancelClick = (id: GridRowId) => () => {
-		setRowModesModel({
-			...rowModesModel,
-			[id]: { mode: GridRowModes.View, ignoreModifications: true },
-		});
-
-		const editedRow = rows.find((row) => row.id === id);
-		if (editedRow!.isNew) {
-			setRows(rows.filter((row) => row.id !== id));
-		}
+	const handleEdit = (lat: number, lng: number) => {
+		let index = rows.findIndex((e) => e.id == idSelecteMap.current);
+		rows[index].lugardeOrganizacion = `${lat} + - + ${lng}`;
 	};
 
 	const processRowUpdate = (newRow: GridRowModel) => {
@@ -89,6 +94,38 @@ export default function FullFeaturedCrudGrid() {
 	};
 
 	const columns: GridColDef[] = [
+		{
+			field: "actions",
+			type: "actions",
+			headerName: "Actions",
+			width: 100,
+			cellClassName: "actions",
+			getActions: ({ id }) => {
+				const isInEditMode =
+					rowModesModel[id]?.mode === GridRowModes.Edit;
+
+				if (isInEditMode) {
+					setOpenEdit(true);
+					return [];
+				}
+
+				return [
+					<GridActionsCellItem
+						icon={<EditIcon />}
+						label="Edit"
+						className="textPrimary"
+						onClick={() => handleOpenMap(id)}
+						color="inherit"
+					/>,
+					<GridActionsCellItem
+						icon={<DeleteIcon />}
+						label="Delete"
+						onClick={handleOpenDialog(id)}
+						color="inherit"
+					/>,
+				];
+			},
+		},
 		{ field: "autor", headerName: "Autor", minWidth: 150, editable: true },
 		{
 			field: "titulo",
@@ -120,53 +157,6 @@ export default function FullFeaturedCrudGrid() {
 			headerName: "Lugar de Organización",
 			minWidth: 180,
 			editable: true,
-		},
-		{
-			field: "actions",
-			type: "actions",
-			headerName: "Actions",
-			width: 100,
-			cellClassName: "actions",
-			getActions: ({ id }) => {
-				const isInEditMode =
-					rowModesModel[id]?.mode === GridRowModes.Edit;
-
-				if (isInEditMode) {
-					return [
-						<GridActionsCellItem
-							icon={<SaveIcon />}
-							label="Save"
-							sx={{
-								color: "primary.main",
-							}}
-							onClick={handleSaveClick(id)}
-						/>,
-						<GridActionsCellItem
-							icon={<CancelIcon />}
-							label="Cancel"
-							className="textPrimary"
-							onClick={handleCancelClick(id)}
-							color="inherit"
-						/>,
-					];
-				}
-
-				return [
-					<GridActionsCellItem
-						icon={<EditIcon />}
-						label="Edit"
-						className="textPrimary"
-						onClick={handleEditClick(id)}
-						color="inherit"
-					/>,
-					<GridActionsCellItem
-						icon={<DeleteIcon />}
-						label="Delete"
-						onClick={handleDeleteClick(id)}
-						color="inherit"
-					/>,
-				];
-			},
 		},
 	];
 
@@ -204,6 +194,28 @@ export default function FullFeaturedCrudGrid() {
 				}}
 				slotProps={{
 					toolbar: { setRows, setRowModesModel },
+				}}
+			/>
+			<AlertDialogSlide
+				title="Desea borrar el elemento?"
+				description={`Desea borrar el autor ${
+					rows[Number(idSelected.current) || 0].autor
+				}`}
+				open={open}
+				close={handleClose}
+				accept={handleDelete}
+			/>
+			<AlertDialogSlideMap
+				description=""
+				title="Mapa"
+				accept={(lat, lng) => {
+					handleEdit(lat, lng);
+
+					setOpenEdit(false);
+				}}
+				open={openEdit}
+				close={() => {
+					setOpenEdit(false);
 				}}
 			/>
 		</Box>
