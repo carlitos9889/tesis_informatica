@@ -79,7 +79,7 @@ export default function FullFeaturedCrudGrid() {
 	};
 
 	const handleEdit = (lat: number, lng: number) => {
-		let index = rows.findIndex((e) => e.id == idSelecteMap.current);
+		const index = rows.findIndex((e) => e.id == idSelecteMap.current);
 		rows[index].lugardeOrganizacion = `${lat} + - + ${lng}`;
 	};
 

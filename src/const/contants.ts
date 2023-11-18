@@ -139,6 +139,20 @@ const JSON_AUX = {
 			},
 		],
 	},
+	nodesAndLinks: {
+		nodes: [
+			{ x: 10, y: 20 },
+			{ x: 30, y: 40 },
+			// ... más nodos
+		],
+		links: [
+			[
+				{ x: 10, y: 20 },
+				{ x: 30, y: 40 },
+			],
+			// ... más enlaces
+		],
+	},
 };
 
 export default JSON_AUX;

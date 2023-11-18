@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import * as React from "react";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
@@ -63,7 +64,7 @@ export function AlertDialogSlideMap({ title, open, close, accept }: Props) {
 								draggable
 								eventHandlers={{
 									move: (e) => {
-										let latLng = (e as any).latlng;
+										const latLng = (e as any).latlng;
 										setposition({ ...latLng });
 										console.log(e);
 									},
@@ -85,7 +86,10 @@ export function AlertDialogSlideMap({ title, open, close, accept }: Props) {
 					<Button onClick={close}>No</Button>
 					<Button
 						onClick={() => {
-							handle(position.lat, position.lng);
+							handle(
+								(position as any).lat,
+								(position as any).lng
+							);
 						}}
 					>
 						Sì

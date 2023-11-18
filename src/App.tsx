@@ -8,11 +8,36 @@ import { CustomLinearChart } from "./components/charts/CustomLineChart";
 import { CustomPie } from "./components/charts/CustomPie";
 import { GRAFICOS } from "./enums/GRAFICOS";
 import JSON_AUX from "./const/contants";
+import { Graph } from "./components/charts/Nodes";
+import { CustomMapMarcador } from "./components/CustomMapMarcador";
+import { CustomMapMarcadores } from "./components/CustomMapMarcadores";
 
 function App() {
 	const [showGrafica, setshowGrafica] = useState<GRAFICOS>(GRAFICOS.TABLE);
 
 	const { toPDF, targetRef } = usePDF({ filename: "page.pdf" });
+	const generateDataWithConnections = (count: number) => {
+		const nodes = [];
+		const links = [];
+
+		for (let i = 1; i <= count; i++) {
+			const node = {
+				id: i,
+				x: Math.random() * 100,
+				y: Math.random() * 100,
+			};
+			nodes.push(node);
+
+			if (i > 1) {
+				// Conecta el nodo actual con los dos nodos anteriores
+				links.push([nodes[i - 1], node]);
+				links.push([nodes[i - 2], node]);
+			}
+		}
+
+		return { nodes, links };
+	};
+
 	return (
 		<>
 			<CustomAppBar
@@ -72,6 +97,21 @@ function App() {
 						<CustomLinearChart
 							data={JSON_AUX.oneLinesPlaceOrganizacion}
 						/>
+					</Container>
+				)}
+				{showGrafica == GRAFICOS.NODES && (
+					<Container ref={targetRef} maxWidth="md">
+						<Graph data={generateDataWithConnections(20)} />
+					</Container>
+				)}
+				{showGrafica == GRAFICOS.MAPAS_ONLY && (
+					<Container ref={targetRef} maxWidth="md">
+						<CustomMapMarcador />
+					</Container>
+				)}
+				{showGrafica == GRAFICOS.MAPAS_MANY && (
+					<Container ref={targetRef} maxWidth="md">
+						<CustomMapMarcadores />
 					</Container>
 				)}
 			</CustomAppBar>
