@@ -25,11 +25,14 @@ import TitleOutlinedIcon from "@mui/icons-material/TitleOutlined";
 import FormatColorFillOutlinedIcon from "@mui/icons-material/FormatColorFillOutlined";
 import TopicOutlinedIcon from "@mui/icons-material/TopicOutlined";
 import InventoryOutlinedIcon from "@mui/icons-material/InventoryOutlined";
+import AutoGraphIcon from "@mui/icons-material/AutoGraph";
 import PlaceOutlinedIcon from "@mui/icons-material/PlaceOutlined";
+import BackupIcon from "@mui/icons-material/Backup";
 import { Options } from "react-to-pdf";
 
 import { GRAFICOS } from "../enums/GRAFICOS";
 import Button from "@mui/material/Button";
+import ZoomInMapIcon from "@mui/icons-material/ZoomInMap";
 
 const drawerWidth = 240;
 
@@ -159,6 +162,21 @@ const GRAFICOS_LAYOUTS = [
 		layoutName: "LUGAR ORGANIZACION",
 		grafica: GRAFICOS.LINEAL_PLACE_ORGANIZATION,
 		icono: <PlaceOutlinedIcon />,
+	},
+	{
+		layoutName: "Coautoría",
+		grafica: GRAFICOS.NODES,
+		icono: <ZoomInMapIcon />,
+	},
+	{
+		layoutName: "Mapas Marcador",
+		grafica: GRAFICOS.MAPAS_ONLY,
+		icono: <AutoGraphIcon />,
+	},
+	{
+		layoutName: "Mapas Marcadores",
+		grafica: GRAFICOS.MAPAS_MANY,
+		icono: <BackupIcon />,
 	},
 ];
 
