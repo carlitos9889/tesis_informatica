@@ -9,13 +9,11 @@ import { CustomPie } from "./components/charts/CustomPie";
 import { GRAFICOS } from "./enums/GRAFICOS";
 import JSON_AUX from "./const/contants";
 import { Graph } from "./components/charts/Nodes";
-import { CustomMapMarcador } from "./components/CustomMapMarcador";
-import { CustomMapMarcadores } from "./components/CustomMapMarcadores";
 
 function App() {
 	const [showGrafica, setshowGrafica] = useState<GRAFICOS>(GRAFICOS.TABLE);
 
-	const { toPDF, targetRef } = usePDF({ filename: "page.pdf" });
+	const { toPDF, targetRef } = usePDF({ filename: " graficos.pdf" });
 	const generateDataWithConnections = (count: number) => {
 		const nodes = [];
 		const links = [];
@@ -104,7 +102,7 @@ function App() {
 						<Graph data={generateDataWithConnections(20)} />
 					</Container>
 				)}
-				{showGrafica == GRAFICOS.MAPAS_ONLY && (
+				{/* {showGrafica == GRAFICOS.MAPAS_ONLY && (
 					<Container ref={targetRef} maxWidth="md">
 						<CustomMapMarcador />
 					</Container>
@@ -113,7 +111,7 @@ function App() {
 					<Container ref={targetRef} maxWidth="md">
 						<CustomMapMarcadores />
 					</Container>
-				)}
+				)} */}
 			</CustomAppBar>
 		</>
 	);

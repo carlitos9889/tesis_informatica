@@ -25,9 +25,7 @@ import TitleOutlinedIcon from "@mui/icons-material/TitleOutlined";
 import FormatColorFillOutlinedIcon from "@mui/icons-material/FormatColorFillOutlined";
 import TopicOutlinedIcon from "@mui/icons-material/TopicOutlined";
 import InventoryOutlinedIcon from "@mui/icons-material/InventoryOutlined";
-import AutoGraphIcon from "@mui/icons-material/AutoGraph";
 import PlaceOutlinedIcon from "@mui/icons-material/PlaceOutlined";
-import BackupIcon from "@mui/icons-material/Backup";
 import { Options } from "react-to-pdf";
 
 import { GRAFICOS } from "../enums/GRAFICOS";
@@ -168,16 +166,16 @@ const GRAFICOS_LAYOUTS = [
 		grafica: GRAFICOS.NODES,
 		icono: <ZoomInMapIcon />,
 	},
-	{
-		layoutName: "Mapas Marcador",
-		grafica: GRAFICOS.MAPAS_ONLY,
-		icono: <AutoGraphIcon />,
-	},
-	{
-		layoutName: "Mapas Marcadores",
-		grafica: GRAFICOS.MAPAS_MANY,
-		icono: <BackupIcon />,
-	},
+	// {
+	// 	layoutName: "Mapas Marcador",
+	// 	grafica: GRAFICOS.MAPAS_ONLY,
+	// 	icono: <AutoGraphIcon />,
+	// },
+	// {
+	// 	layoutName: "Mapas Marcadores",
+	// 	grafica: GRAFICOS.MAPAS_MANY,
+	// 	icono: <BackupIcon />,
+	// },
 ];
 
 export default function CustomAppBar({
@@ -219,6 +217,7 @@ export default function CustomAppBar({
 						component="div"
 						sx={{ flexGrow: 1 }}
 					>
+						{/* Aqui va el nombre de la empresa */}
 						Nombre de la empresa aun desconocido
 					</Typography>
 					{tipoGrafica != GRAFICOS.TABLE && (
