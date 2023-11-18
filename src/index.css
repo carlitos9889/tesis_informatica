@@ -8,3 +8,7 @@
 	width: 95%;
 	height: 600px;
 }
+
+.MuiBox-root .css-zxdg2z canvas {
+	height: 450px !important;
+}
