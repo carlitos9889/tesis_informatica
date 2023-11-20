@@ -23,6 +23,7 @@ function App() {
 				id: i,
 				x: Math.random() * 100,
 				y: Math.random() * 100,
+				label: "Autor " + Math.round(Math.random() * 100),
 			};
 			nodes.push(node);
 

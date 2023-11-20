@@ -5,8 +5,8 @@ import { Scatter } from "react-chartjs-2";
 
 interface GraphProps {
 	data: {
-		nodes: { x: number; y: number }[];
-		links: { x: number; y: number }[][];
+		nodes: { id: number; x: number; y: number; label: string }[];
+		links: { source: number; target: number; label: string }[];
 	};
 }
 
@@ -15,11 +15,23 @@ export const Graph: React.FC<GraphProps> = ({ data }) => {
 		datasets: [
 			{
 				label: "Nodos",
-				data: data.nodes,
+				data: data.nodes.map((node) => ({
+					x: node.x,
+					y: node.y,
+					r: 10,
+					label: node.label,
+				})),
 				showLine: false,
 				pointRadius: 10,
 				pointHoverRadius: 12,
 				backgroundColor: "rgba(75,192,192,1)",
+				datalabels: {
+					display: "auto", // Muestra la etiqueta siempre
+					// anchor: "end", // Ajusta el ancla de la etiqueta según tus necesidades
+					// align: "start", // Ajusta la alineación de la etiqueta según tus necesidades
+					// color: "black", // Ajusta el color de la etiqueta según tus necesidades
+					font: { size: 12 }, // Ajusta el tamaño de la fuente según tus necesidades
+				},
 			},
 			{
 				label: "Enlaces",
@@ -44,9 +56,33 @@ export const Graph: React.FC<GraphProps> = ({ data }) => {
 			x: { min: 0, max: 100 },
 			y: { min: 0, max: 100 },
 		},
+		plugins: {
+			tooltip: {
+				callbacks: {
+					label: (context: any) => {
+						const label =
+							context.dataset.data[context.dataIndex].label;
+						return context.dataset.label === "Nodos"
+							? `Nodo: ${label}`
+							: `Enlace: ${label}`;
+					},
+				},
+			},
+		},
+		datalabels: {
+			// Configuración global del plugin, puedes ajustar según tus necesidades
+			color: "black",
+			font: { size: 12 },
+		},
 	};
 
-	return <Scatter data={chartData as any} options={options} />;
+	return (
+		<Scatter
+			data={chartData as any}
+			options={options}
+			datasetIdKey="Carlos"
+		/>
+	);
 };
 
 export default Graph;
